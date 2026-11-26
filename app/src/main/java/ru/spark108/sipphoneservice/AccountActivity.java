@@ -17,7 +17,7 @@ public final class AccountActivity extends Activity {
         super.onCreate(state);
         config = Config.load(this);
         setContentView(R.layout.activity_account);
-        findViewById(R.id.back).setOnClickListener(v -> finish());
+        SettingsUi.header(this, R.string.account_title);
         setupRow(R.id.user_row, "Имя пользователя", () -> edit("Имя пользователя", config.user, false, value -> config.user = value));
         setupRow(R.id.domain_row, "Домен SIP", () -> edit("Домен SIP", config.domain, false, value -> config.domain = value));
         setupRow(R.id.server_row, "Прокси SIP", () -> edit("Прокси SIP", config.server, false, value -> config.server = value));

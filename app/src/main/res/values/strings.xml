@@ -6,6 +6,7 @@
     <string name="sip_offline">Не в сети</string>
     <string name="navigate_back">Назад</string>
     <string name="permissions_title">Разрешения</string>
+    <string name="account_title">Учётная запись SIP</string>
     <string name="about_title">О программе</string>
     <string name="microphone_title">Микрофон</string>
     <string name="microphone_purpose">Голос во время вызова</string>
