@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">SIP</string>
+    <string name="sip_calls">SIP-вызовы</string>
+    <string name="sip_registered">Зарегистрирован</string>
+    <string name="sip_registering">Регистрация</string>
+    <string name="sip_offline">Не в сети</string>
+</resources>

@@ -1,0 +1,51 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:fillViewport="true" android:background="@color/settings_background">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="vertical" android:paddingStart="12dp" android:paddingEnd="12dp" android:paddingBottom="30dp">
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="@string/app_name" android:textSize="34sp" android:textStyle="bold" android:textColor="@color/settings_text"
+            android:paddingStart="12dp" android:paddingTop="78dp" android:paddingBottom="27dp" />
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="Подключение" android:textSize="13sp" android:textColor="@color/settings_secondary"
+            android:paddingStart="18dp" android:paddingBottom="9dp" />
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical"
+            android:background="@drawable/settings_card" android:clipToOutline="true">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:minHeight="76dp" android:gravity="center_vertical" android:paddingStart="18dp" android:paddingEnd="18dp">
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/sip_calls"
+                        android:textSize="17sp" android:textColor="@color/settings_text" />
+                    <TextView android:id="@+id/status" android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp" android:textSize="13sp" android:textColor="@color/settings_secondary" />
+                </LinearLayout>
+                <Switch android:id="@+id/enable" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:minHeight="48dp" android:minWidth="48dp" android:gravity="center_vertical"
+                    android:contentDescription="@string/sip_calls" android:saveEnabled="false"
+                    android:splitTrack="false" android:switchMinWidth="36dp" android:showText="false"
+                    android:thumb="@drawable/sip_switch_thumb" android:thumbTint="@android:color/white" android:thumbTintMode="src_in"
+                    android:track="@drawable/sip_switch_track" android:trackTint="@color/sip_switch_track" android:trackTintMode="src_in" />
+            </LinearLayout>
+            <View android:layout_width="match_parent" android:layout_height="1dp" android:layout_marginStart="18dp" android:background="@color/settings_divider" />
+            <include android:id="@+id/accounts_row" layout="@layout/setting_row" />
+        </LinearLayout>
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="Учётная запись SIP" android:textSize="13sp" android:textColor="@color/settings_secondary"
+            android:paddingStart="18dp" android:paddingTop="26dp" android:paddingBottom="9dp" />
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical"
+            android:background="@drawable/settings_card" android:clipToOutline="true">
+            <LinearLayout android:id="@+id/account_list" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" />
+        </LinearLayout>
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="Дополнительно" android:textSize="13sp" android:textColor="@color/settings_secondary"
+            android:paddingStart="18dp" android:paddingTop="26dp" android:paddingBottom="9dp" />
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical"
+            android:background="@drawable/settings_card" android:clipToOutline="true">
+            <include android:id="@+id/notifications_row" layout="@layout/setting_row" />
+        </LinearLayout>
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="Для входящих вызовов оставьте SIP включённым. После перезагрузки телефона подключите его снова."
+            android:textSize="13sp" android:textColor="@color/settings_secondary"
+            android:paddingStart="18dp" android:paddingEnd="18dp" android:paddingTop="18dp" />
+    </LinearLayout>
+</ScrollView>
