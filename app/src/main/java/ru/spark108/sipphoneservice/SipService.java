@@ -85,7 +85,7 @@ public final class SipService extends Service {
             return false;
         }
         try {
-            SipConnectionService.register(this);
+            SipConnectionService.register(this, config);
             startCore();
             updateStatus(R.string.sip_registering);
             return true;

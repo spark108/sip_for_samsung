@@ -2,6 +2,10 @@ package ru.spark108.sipphoneservice;
 
 import android.content.ComponentName;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.Icon;
 import android.net.Uri;
 import android.os.Bundle;
 import android.telecom.Connection;
@@ -11,10 +15,12 @@ import android.telecom.DisconnectCause;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
+import android.util.Log;
 import org.linphone.core.Address;
 import org.linphone.core.Call;
 
 public final class SipConnectionService extends ConnectionService {
+    private static final int ACCOUNT_ICON_SIZE = 64;
     static final String ACCOUNT_ID = "sip-account";
     static final String EXTRA_CALL_ID = "sip_call_id";
 
@@ -22,12 +28,30 @@ public final class SipConnectionService extends ConnectionService {
         return new PhoneAccountHandle(new ComponentName(context, SipConnectionService.class), ACCOUNT_ID);
     }
 
-    static void register(Context context) {
-        PhoneAccount account = new PhoneAccount.Builder(handle(context), "SIP")
+    static void register(Context context, Config config) {
+        if (!config.valid()) return;
+
+        String name = config.displayName.isEmpty() ? config.user : config.displayName;
+        int characters = Math.min(name.codePointCount(0, name.length()), 100);
+        String label = context.getString(R.string.phone_account_label, name.substring(0, name.offsetByCodePoints(0, characters)));
+        PhoneAccount.Builder account = new PhoneAccount.Builder(handle(context), label)
             .setCapabilities(PhoneAccount.CAPABILITY_CALL_PROVIDER)
-            .setSupportedUriSchemes(java.util.Arrays.asList(PhoneAccount.SCHEME_TEL, PhoneAccount.SCHEME_SIP))
-            .build();
-        ((TelecomManager) context.getSystemService(TELECOM_SERVICE)).registerPhoneAccount(account);
+            .setSupportedUriSchemes(java.util.Arrays.asList(PhoneAccount.SCHEME_TEL, PhoneAccount.SCHEME_SIP));
+        TelecomManager telecom = context.getSystemService(TelecomManager.class);
+        try {
+            telecom.registerPhoneAccount(account.setIcon(accountIcon(context)).build());
+        } catch (IllegalArgumentException e) {
+            Log.w("SIPPhoneService", "Telecom rejected the phone account icon", e);
+            telecom.registerPhoneAccount(account.setIcon(null).build());
+        }
+    }
+
+    private static Icon accountIcon(Context context) {
+        Drawable launcher = context.getDrawable(R.mipmap.ic_launcher);
+        Bitmap bitmap = Bitmap.createBitmap(ACCOUNT_ICON_SIZE, ACCOUNT_ICON_SIZE, Bitmap.Config.ARGB_8888);
+        launcher.setBounds(0, 0, ACCOUNT_ICON_SIZE, ACCOUNT_ICON_SIZE);
+        launcher.draw(new Canvas(bitmap));
+        return Icon.createWithBitmap(bitmap);
     }
 
     @Override public Connection onCreateOutgoingConnection(PhoneAccountHandle account, ConnectionRequest request) {

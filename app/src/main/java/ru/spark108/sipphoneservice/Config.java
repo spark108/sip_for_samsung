@@ -14,13 +14,14 @@ import javax.crypto.spec.GCMParameterSpec;
 import org.json.JSONArray;
 
 final class Config {
-    String user = "", domain = "", server = "", password = "";
+    String user = "", displayName = "", domain = "", server = "", password = "";
     private static final String KEY = "sip_password_v1";
 
     static Config load(Context context) {
         SharedPreferences p = context.getSharedPreferences("sip", 0);
         Config c = new Config();
         c.user = p.getString("user", "");
+        c.displayName = p.getString("display_name", "");
         c.domain = p.getString("domain", "");
         c.server = p.getString("server", "");
         String saved = p.getString("password", "");
@@ -61,6 +62,7 @@ final class Config {
         System.arraycopy(encrypted, 0, data, iv.length, encrypted.length);
         context.getSharedPreferences("sip", 0).edit()
             .putString("user", user).putString("domain", domain).putString("server", server)
+            .putString("display_name", displayName)
             .putString("password", Base64.encodeToString(data, Base64.NO_WRAP)).apply();
     }
 

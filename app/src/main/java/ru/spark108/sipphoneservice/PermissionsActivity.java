@@ -61,7 +61,7 @@ public final class PermissionsActivity extends Activity {
     }
 
     private void openCallAccounts() {
-        if (Config.load(this).valid()) SipConnectionService.register(this);
+        SipConnectionService.register(this, Config.load(this));
         SettingsUi.openCallAccounts(this);
     }
 }

@@ -7,6 +7,9 @@
     <string name="navigate_back">Назад</string>
     <string name="permissions_title">Разрешения</string>
     <string name="account_title">Учётная запись SIP</string>
+    <string name="display_name_title">Отображаемое имя</string>
+    <string name="display_name_default">Используется номер SIP</string>
+    <string name="phone_account_label">SIP: %1$s</string>
     <string name="about_title">О программе</string>
     <string name="microphone_title">Микрофон</string>
     <string name="microphone_purpose">Голос во время вызова</string>

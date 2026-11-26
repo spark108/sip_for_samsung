@@ -19,6 +19,9 @@ public final class AccountActivity extends Activity {
         setContentView(R.layout.activity_account);
         SettingsUi.header(this, R.string.account_title);
         setupRow(R.id.user_row, "Имя пользователя", () -> edit("Имя пользователя", config.user, false, value -> config.user = value));
+        String displayNameTitle = getString(R.string.display_name_title);
+        setupRow(R.id.display_name_row, displayNameTitle, () -> edit(displayNameTitle, config.displayName,
+            false, value -> config.displayName = value, this::updatePhoneAccount));
         setupRow(R.id.domain_row, "Домен SIP", () -> edit("Домен SIP", config.domain, false, value -> config.domain = value));
         setupRow(R.id.server_row, "Прокси SIP", () -> edit("Прокси SIP", config.server, false, value -> config.server = value));
         setupRow(R.id.password_row, "Пароль", () -> edit("Пароль", config.password, true, value -> config.password = value));
@@ -33,6 +36,7 @@ public final class AccountActivity extends Activity {
 
     private void updateRows() {
         summary(R.id.user_row, config.user.isEmpty() ? "Не указано" : config.user);
+        summary(R.id.display_name_row, config.displayName.isEmpty() ? getString(R.string.display_name_default) : config.displayName);
         summary(R.id.domain_row, config.domain.isEmpty() ? "Не указан" : config.domain);
         summary(R.id.server_row, config.server.isEmpty() ? "По умолчанию — домен SIP" : config.server);
         summary(R.id.password_row, config.password.isEmpty() ? "Не указан" : "Установлен");
@@ -45,6 +49,10 @@ public final class AccountActivity extends Activity {
 
     private interface Change { void apply(String value); }
     private void edit(String title, String oldValue, boolean secret, Change change) {
+        edit(title, oldValue, secret, change, this::connectionSettingsSaved);
+    }
+
+    private void edit(String title, String oldValue, boolean secret, Change change, Runnable afterSave) {
         EditText input = new EditText(this);
         input.setSingleLine(true);
         input.setInputType(secret ? InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD : InputType.TYPE_CLASS_TEXT);
@@ -70,9 +78,17 @@ public final class AccountActivity extends Activity {
                     return;
                 }
                 updateRows();
-                SipService service = SipService.instance();
-                if (service != null) service.reloadConfig();
-                else if (config.valid()) SipConnectionService.register(this);
+                afterSave.run();
             }).show();
+    }
+
+    private void connectionSettingsSaved() {
+        SipService service = SipService.instance();
+        if (service != null) service.reloadConfig();
+        else updatePhoneAccount();
+    }
+
+    private void updatePhoneAccount() {
+        SipConnectionService.register(this, config);
     }
 }

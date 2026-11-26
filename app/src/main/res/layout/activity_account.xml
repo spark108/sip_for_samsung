@@ -8,6 +8,8 @@
             android:layout_marginTop="20dp" android:background="@drawable/settings_card" android:clipToOutline="true">
             <include android:id="@+id/user_row" layout="@layout/setting_row" />
             <View android:layout_width="match_parent" android:layout_height="1dp" android:layout_marginStart="18dp" android:background="@color/settings_divider" />
+            <include android:id="@+id/display_name_row" layout="@layout/setting_row" />
+            <View android:layout_width="match_parent" android:layout_height="1dp" android:layout_marginStart="18dp" android:background="@color/settings_divider" />
             <include android:id="@+id/domain_row" layout="@layout/setting_row" />
             <View android:layout_width="match_parent" android:layout_height="1dp" android:layout_marginStart="18dp" android:background="@color/settings_divider" />
             <include android:id="@+id/server_row" layout="@layout/setting_row" />

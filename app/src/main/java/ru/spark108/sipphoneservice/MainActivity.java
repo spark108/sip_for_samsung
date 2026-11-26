@@ -27,8 +27,7 @@ public final class MainActivity extends Activity {
 
     @Override public void onCreate(Bundle state) {
         super.onCreate(state);
-        Config config = Config.load(this);
-        if (config.valid()) SipConnectionService.register(this);
+        SipConnectionService.register(this, Config.load(this));
         setContentView(R.layout.activity_main);
         enable = findViewById(R.id.enable);
         status = findViewById(R.id.status);
