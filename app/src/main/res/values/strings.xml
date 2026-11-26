@@ -23,6 +23,8 @@
     <string name="about_description">Звонки через SIP в штатном приложении «Телефон».</string>
     <string name="about_author">Автор</string>
     <string name="about_author_name">Первушин Виктор Олегович (Spark108)</string>
+    <string name="about_source_code">Исходный код</string>
+    <string name="about_source_unavailable">Не удалось открыть репозиторий GitHub</string>
     <string name="about_version">Версия %1$s</string>
     <string name="update_checking">Проверка обновлений…</string>
     <string name="update_latest">Установлена последняя версия</string>

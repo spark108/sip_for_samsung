@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.core.content.FileProvider;
 import java.io.File;
 import java.util.concurrent.ExecutorService;
@@ -34,6 +35,7 @@ public final class AboutActivity extends Activity {
         super.onCreate(state);
         setContentView(R.layout.activity_about);
         SettingsUi.header(this, R.string.about_title);
+        SettingsUi.row(findViewById(R.id.source_code_row), getString(R.string.about_source_code), "GitHub", this::openSourceCode);
         status = findViewById(R.id.update_status);
         progress = findViewById(R.id.update_progress);
         action = findViewById(R.id.update_action);
@@ -45,6 +47,14 @@ public final class AboutActivity extends Activity {
             checkForUpdate();
         } catch (PackageManager.NameNotFoundException e) {
             status.setText(R.string.update_check_failed);
+        }
+    }
+
+    private void openSourceCode() {
+        try {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(GitHubUpdates.REPOSITORY_URL)));
+        } catch (ActivityNotFoundException | SecurityException e) {
+            Toast.makeText(this, R.string.about_source_unavailable, Toast.LENGTH_SHORT).show();
         }
     }
 

@@ -26,6 +26,7 @@ import org.json.JSONObject;
 
 final class GitHubUpdates {
     private static final String REPOSITORY = "/spark108/sip_for_samsung";
+    static final String REPOSITORY_URL = "https://github.com" + REPOSITORY;
     private static final String LATEST = "https://api.github.com/repos" + REPOSITORY + "/releases/latest";
     private static final String APK_NAME = "SIP.apk";
     private static final long MAX_APK_BYTES = 256L * 1024 * 1024;
