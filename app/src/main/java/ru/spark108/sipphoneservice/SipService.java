@@ -33,7 +33,7 @@ import org.linphone.core.RegistrationState;
 
 public final class SipService extends Service {
     private static final String TAG = "SIPPhoneService";
-    private static final String CHANNEL = "sip_registration";
+    static final String CHANNEL = "sip_registration";
     private static final String ACTION_STOP = "stop";
     static final String ACTION_STATUS = "ru.spark108.sipphoneservice.STATUS";
     private static SipService active;

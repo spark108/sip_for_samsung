@@ -41,7 +41,9 @@
             android:paddingStart="18dp" android:paddingTop="26dp" android:paddingBottom="9dp" />
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical"
             android:background="@drawable/settings_card" android:clipToOutline="true">
-            <include android:id="@+id/notifications_row" layout="@layout/setting_row" />
+            <include android:id="@+id/permissions_row" layout="@layout/setting_row" />
+            <View android:layout_width="match_parent" android:layout_height="1dp" android:layout_marginStart="18dp" android:background="@color/settings_divider" />
+            <include android:id="@+id/about_row" layout="@layout/setting_row" />
         </LinearLayout>
         <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
             android:text="Для входящих вызовов оставьте SIP включённым. После перезагрузки телефона подключите его снова."

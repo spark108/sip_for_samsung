@@ -1,0 +1,22 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent" android:fillViewport="true"
+    android:background="@color/settings_background" android:fitsSystemWindows="true">
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="vertical" android:paddingHorizontal="12dp" android:paddingBottom="24dp">
+
+        <include layout="@layout/settings_header" />
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="20dp" android:background="@drawable/settings_card" android:clipToOutline="true"
+            android:orientation="vertical">
+            <include android:id="@+id/microphone_row" layout="@layout/setting_row" />
+            <View android:layout_width="match_parent" android:layout_height="1dp" android:layout_marginHorizontal="18dp" android:background="@color/settings_divider" />
+            <include android:id="@+id/notifications_row" layout="@layout/setting_row" />
+            <View android:layout_width="match_parent" android:layout_height="1dp" android:layout_marginHorizontal="18dp" android:background="@color/settings_divider" />
+            <include android:id="@+id/call_permissions_row" layout="@layout/setting_row" />
+            <View android:layout_width="match_parent" android:layout_height="1dp" android:layout_marginHorizontal="18dp" android:background="@color/settings_divider" />
+            <include android:id="@+id/install_updates_row" layout="@layout/setting_row" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
